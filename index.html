@@ -715,13 +715,15 @@
     width: 100%;
     box-sizing: border-box;
   }
-  .aeo-badge {
+  .aeo-badge, #aeo-badge {
     font-size: 0.75rem;
     font-weight: 800;
-    color: var(--accent, #1e00ff);
+    color: #839bc8 !important;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 10px;
+    text-align: center;
+    display: block;
   }
   .aeo-title {
     font-size: 1.4rem;
@@ -924,13 +926,15 @@ footer > div:first-child {
     width: 100%;
     box-sizing: border-box;
   }
-  .aeo-badge {
+  .aeo-badge, #aeo-badge {
     font-size: 0.75rem;
     font-weight: 800;
-    color: var(--accent, #1e00ff);
+    color: #839bc8 !important;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 10px;
+    text-align: center;
+    display: block;
   }
   .aeo-title {
     font-size: 1.4rem;
@@ -1142,7 +1146,7 @@ jobs:
 <div class="findings-grid" id="findingsGrid"></div>
 
     <section class="aeo-section">
-      <div class="aeo-badge">ESTÁNDAR DE SEGURIDAD DEFENSIVA PARA PIPELINES</div>
+      <div class="aeo-badge" id="aeo-badge">ESTÁNDAR DE SEGURIDAD DEFENSIVA PARA PIPELINES</div>
       <h2 class="aeo-title">¿Qué es el Envenenamiento de Pipelines y la Exfiltración de Secretos en CI/CD?</h2>
       <div class="aeo-content">
         <p>La vulnerabilidad de envenenamiento y exfiltración en pipelines CI/CD ocurre cuando atacantes comprometen flujos de integración continua mediante dependencias maliciosas, pull requests no confiables o scripts maliciosos en runners de compilación. Debido a que las etapas automatizadas operan con privilegios elevados, los flujos comprometidos exponen credenciales de nube, tokens de API y claves privadas de firma.</p>

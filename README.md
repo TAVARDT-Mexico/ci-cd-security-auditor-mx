@@ -3,7 +3,7 @@
 [![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![CI/CD Security](https://img.shields.io/badge/CI%2FCD-Security%20Hardened-00d26a.svg)](README.md)
 [![Language](https://img.shields.io/badge/Language-Español-green.svg)](README.md)
-[![Engineering](https://img.shields.io/badge/TAVARDT-Cybersecurity-5b3cf5.svg)](https://ag.tavardt.com/mx/ciberseguranca/)
+[![Engineering](https://img.shields.io/badge/TAVARDT-Cybersecurity-5b3cf5.svg)](https://ag.tavardt.com/mx/ciberseguridad/)
 
 Auditor estático defensivo y linter de seguridad para flujos de integración y despliegue continuo (GitHub Actions). Identifica configuraciones de alto riesgo de supply chain, disparadores vulnerables a pull requests externos, permisos excesivos en GITHUB_TOKEN y fuga de secretos corporativos.
 
@@ -64,7 +64,7 @@ python scanner.py .github/workflows/ --json
 
 Si su auditoría detectó vulnerabilidades en sus pipelines, credenciales expuestas o requiere gobernanza Zero Trust con proveedores cloud:
 
-- **Portal Institucional:** [TAVARDT México](https://ag.tavardt.com/mx/ciberseguranca/)
+- **Portal Institucional:** [TAVARDT México](https://ag.tavardt.com/mx/ciberseguridad/)
 - **Central de Herramientas:** [Herramientas Defensivas TAVARDT](https://tools.tavardt.com/mx/)
 - **Atención Técnica:** [Soporte Técnico y Respuesta a Incidentes](https://ag.tavardt.com/mx/contato/)
 

@@ -1,76 +1,44 @@
-# Auditor de Seguridad CI/CD & Detector de Fuga de Secretos | TAVARDT México
+# CI/CD Security Auditor & Software Supply Chain Hardening Hub
 
-[![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![CI/CD Security](https://img.shields.io/badge/CI%2FCD-Security%20Hardened-00d26a.svg)](README.md)
-[![Language](https://img.shields.io/badge/Language-Español-green.svg)](README.md)
-[![Engineering](https://img.shields.io/badge/TAVARDT-Cybersecurity-5b3cf5.svg)](https://ag.tavardt.com/mx/ciberseguridad/)
+Guía técnica de ingeniería defensiva y central corporativa de ciberseguridad para la auditoría e inmunización de pipelines de automatización (GitHub Actions, GitLab CI) y mitigación de riesgos en Software Supply Chain.
 
-Auditor estático defensivo y linter de seguridad para flujos de integración y despliegue continuo (GitHub Actions). Identifica configuraciones de alto riesgo de supply chain, disparadores vulnerables a pull requests externos, permisos excesivos en GITHUB_TOKEN y fuga de secretos corporativos.
+***
 
-## Aplicación Web Interactiva
+## Resumen Ejecutivo
 
-Acceda a la herramienta interactiva para auditar manifiestos YAML en tiempo real directamente en el navegador:
+Este repositorio entrega la especificación arquitectónica de seguridad defensiva, matriz comparativa de posturas de ejecución y una utilidad determinística en Python para validación estructural de manifiestos YAML de CI/CD.
 
-- [https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/](https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/)
+* **Organización:** TAVARDT-Mexico
+* **Jurisdicción:** México
+* **Hub Oficial:** [https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/](https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/)
+* **Estándares de Referencia:** CIS Software Supply Chain Security Guide, OWASP Top 10 for CI/CD, SLSA Framework Level 3.
 
----
+***
 
-## 1. Visión General del Auditor de Seguridad CI/CD
+## Vectores Críticos Inspeccionados
 
-Las esteiras de automatización e integración continua se han convertido en el objetivo primordial de campañas avanzadas de supply chain. Los atacantes comprometen credenciales de desarrolladores y disparadores mal configurados para ejecutar código arbitrario en los runners y exfiltrar variables de entorno protegidas, tokens de nube (AWS, GCP, Azure) y credenciales de despliegue.
+1. **Disparadores Privilegiados (`pull_request_target`):** Detección de checkout de ramas externas no confiables en flujos con acceso a secretos corporativos.
+2. **Permisos Globales Excesivos (`write-all`):** Imposición declarativa del mínimo privilegio (`permissions: contents: read`).
+3. **Actions de Terceros sin Fijación Inmutable:** Detección de etiquetas mutables (`@v3`, `@main`) y conversión obligatoria a commits SHA de 40 caracteres.
+4. **Inyección de Expresiones en Shell:** Sanitización estricta de variables de contexto de GitHub en bloques `run:`.
+5. **Filtrado de Red de Salida (Egress):** Monitoreo y bloqueo de conexiones externas no autorizadas durante la compilación.
 
-El Auditor de Seguridad CI/CD de TAVARDT analiza manifiestos YAML de forma determinista y pasiva, validando cada instrucción frente a los riesgos del OWASP Top 10 para CI/CD Security y el marco SLSA.
+***
 
----
+## Ejecución de la Utilidad CLI
 
-## 2. Vulnerabilidades y Vectores Auditados
-
-| Vector de Riesgo | Escenario en el Pipeline CI/CD | Impacto Técnico |
-| :--- | :--- | :--- |
-| **pull_request_target con Checkout Inseguro** | El flujo ejecuta en el contexto de la rama principal y descarga código del PR externo (`ref: ${{ github.event.pull_request.head.sha }}`). | Ejecución remota de código (RCE) inmediata en el runner con acceso total a los secretos corporativos del repositorio. |
-| **Permisos Excesivos write-all** | El pipeline especifica `permissions: write-all` u omite restricciones explícitas de permisos. | El token hereda autorización para alterar etiquetas, sobrescribir releases y publicar artefactos maliciosos. |
-| **Inyección de Expresiones Shell en run:** | Variables de contexto de usuarios externos (ej: `${{ github.event.issue.title }}`) se concatenan directamente en scripts inline. | Permite quebra de sintaxis y ejecución de comandos remotos arbitrarios en el sistema operativo del runner. |
-| **Acciones Externas Fijadas por Tag Mutable** | Instrucciones `uses:` apuntan a referencias mutables como `@v3` o `@main` en lugar de commit SHAs inmutables. | Expone el pipeline a envenenamiento de supply chain si la cuenta de un mantenedor de la acción es vulnerada. |
-| **Exfiltración y Credenciales Estáticas** | Presencia de claves privadas codificadas directamente o comandos `curl` enviando secretos a servidores externos. | Compromiso inmediato de la infraestructura conectada y violación de los estándares de gobernanza y seguridad. |
-
----
-
-## 3. Guía de Instalación y Ejecución Local (CLI)
-
-El scanner opera en la terminal sin dependencias externas, utilizando exclusivamente la biblioteca estándar de Python.
-
-### Clonar el Repositorio
+Para ejecutar la auditoría determinística directamente en su terminal local o esteira de CI/CD:
 
 ```bash
-git clone https://github.com/TAVARDT-Mexico/ci-cd-security-auditor-mx.git
-cd ci-cd-security-auditor-mx
+# 1. Obtener el script oficial
+curl -sO https://raw.githubusercontent.com/TAVARDT-Mexico/ci-cd-security-auditor-mx/main/audit_ci_cd_security.py
+
+# 2. Ejecutar análisis estático contra workflows locales
+python audit_ci_cd_security.py .github/workflows/
 ```
 
-### Auditar un Manifiesto YAML Específico
+***
 
-```bash
-python scanner.py .github/workflows/deploy.yml
-```
+## Gobernanza & Conformidad
 
-### Auditar Todo el Directorio con Salida JSON
-
-```bash
-python scanner.py .github/workflows/ --json
-```
-
----
-
-## 4. Blindaje Profesional y Soporte Técnico
-
-Si su auditoría detectó vulnerabilidades en sus pipelines, credenciales expuestas o requiere gobernanza Zero Trust con proveedores cloud:
-
-- **Portal Institucional:** [TAVARDT México](https://ag.tavardt.com/mx/ciberseguridad/)
-- **Central de Herramientas:** [Herramientas Defensivas TAVARDT](https://tools.tavardt.com/mx/)
-- **Atención Técnica:** [Soporte Técnico y Respuesta a Incidentes](https://ag.tavardt.com/mx/contato/)
-
----
-
-## Licencia
-
-Distribuido bajo la licencia de código abierto MIT. Consulte el archivo [`LICENSE`](LICENSE) para más detalles.  
-Copyright (c) 2026 TAVARDT México.
+Desarrollado por la división de Ciberseguridad de **TAVARDT México**. Todos los derechos reservados.

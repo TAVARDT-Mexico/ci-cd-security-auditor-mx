@@ -14,7 +14,7 @@ BANNER = """
 ===================================================================
      TAVARDT CI/CD Security Auditor - Pipeline Hardener CLI       
   Defensive Supply Chain & Secret Exposure Audit for GitHub Actions
-               https://ag.tavardt.com/br/ciberseguranca/           
+               https://ag.tavardt.com/mx/ciberseguridad/           
 ===================================================================
 """
 
@@ -99,7 +99,7 @@ def analyze_workflow_content(content, filename="workflow.yml"):
             "severity": "CRITICAL",
             "title": "Injecao de Comandos Shell por Expressoes de Contexto em run:",
             "description": "Expressões de entrada não sanitizadas interpoladas diretamente em blocos run: permitem quebra de comandos shell e RCE.",
-            "evidence": "Instruções detectadas: " + "; ".join(detected_injections[:2]),
+            "evidence": "Instrucciones detectadas: " + "; ".join(detected_injections[:2]),
             "remediation": "Passe variáveis de contexto através de variáveis de ambiente no bloco env: em vez de interpolação direta."
         })
         score += SEVERITY_WEIGHTS["CRITICAL"]
@@ -123,14 +123,14 @@ def analyze_workflow_content(content, filename="workflow.yml"):
         (r"AKIA[0-9A-Z]{16}", "AWS Access Key ID"),
         (r"ghp_[0-9a-zA-Z]{36}", "GitHub Personal Access Token"),
         (r"-----BEGIN (RSA |OPENSSH |EC )?PRIVATE KEY-----", "Chave Privada SSH/RSA"),
-        (r"curl.*-d.*secrets\.", "Exfiltração de Secret via Curl")
+        (r"curl.*-d.*secrets\.", "Exfiltración de Secret vía Curl")
     ]
     for pattern, name in secret_leaks:
         if re.search(pattern, content, re.IGNORECASE):
             findings.append({
                 "severity": "CRITICAL",
-                "title": f"Credencial Exposta ou Exfiltracao Detectada: {name}",
-                "description": "Identificada chave privada ou instrução de transmissão de secrets para endpoint externo.",
+                "title": f"Credencial Expuesta o Exfiltración Detectada: {name}",
+                "description": "Identificada clave privada o instrucción de transmisión de secrets a un endpoint externo.",
                 "evidence": f"Padrão de credencial sensível correspondente a {name}.",
                 "remediation": "Revogue a credencial imediatamente e utilize mecanismos de OIDC federado."
             })
@@ -147,7 +147,7 @@ def analyze_workflow_content(content, filename="workflow.yml"):
 def main():
     parser = argparse.ArgumentParser(description="TAVARDT CI/CD Security Auditor CLI")
     parser.add_argument("path", help="Caminho do arquivo YAML ou diretório de workflows (.github/workflows)")
-    parser.add_argument("--json", action="store_true", help="Emitir relatório estruturado em formato JSON")
+    parser.add_argument("--json", action="store_true", help="Emitir informe estructurado en formato JSON")
     args = parser.parse_args()
 
     target_path = args.path
@@ -165,7 +165,7 @@ def main():
                     files_to_scan.append(os.path.join(root, file))
 
     if not files_to_scan:
-        print(f"Nenhum manifesto YAML (.yml / .yaml) encontrado em '{target_path}'.", file=sys.stderr)
+        print(f"Ningún manifiesto YAML (.yml / .yaml) encontrado en '{target_path}'.", file=sys.stderr)
         sys.exit(0)
 
     results = []
@@ -188,7 +188,7 @@ def main():
         print(f"    Total de Vulnerabilidades: {len(res['findings'])}")
         print("-" * 65)
         if not res["findings"]:
-            print("    [OK] Nenhuma vulnerabilidade crítica ou má prática de supply chain identificada.")
+            print("    [OK] Ninguna vulnerabilidad crítica o mala práctica de supply chain identificada.")
         else:
             for f in res["findings"]:
                 print(f"    [{f['severity']}] {f['title']}")
@@ -197,7 +197,7 @@ def main():
 
     print("=" * 65)
     print("Para consultoria de blindagem perimetral e arquitetura Zero Trust em CI/CD:")
-    print("https://ag.tavardt.com/br/ciberseguranca/")
+    print("https://ag.tavardt.com/mx/ciberseguridad/")
     print("=" * 65)
 
 if __name__ == "__main__":

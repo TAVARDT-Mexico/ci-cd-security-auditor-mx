@@ -43,4 +43,12 @@ python audit_ci_cd_security.py .github/workflows/
 
 ***
 
+## Enlaces Útiles
+
+* **Portal Corporativo:** https://ag.tavardt.com/mx/
+* **Suite de Diagnósticos:** https://tools.tavardt.com/mx/
+* **Contacto Técnico:** https://ag.tavardt.com/mx/contacto/
+
+***
+
 © 2026 TAVARDT. Todos los derechos reservados.

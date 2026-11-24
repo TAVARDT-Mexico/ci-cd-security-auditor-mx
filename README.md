@@ -35,7 +35,7 @@ Para ejecutar la auditoría determinística directamente en su terminal local o 
 
 ```bash
 # 1. Obtener el script oficial
-curl -sO https://raw.githubusercontent.com/TAVARDT-Mexico/ci-cd-security-auditor-mx/main/audit_ci_cd_security.py
+curl -sO https://raw.githubusercontent.com/TAVARDT/ci-cd-security-auditor-mx/main/audit_ci_cd_security.py
 
 # 2. Ejecutar análisis estático contra workflows locales
 python audit_ci_cd_security.py .github/workflows/

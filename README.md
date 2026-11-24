@@ -1,4 +1,4 @@
-# CI/CD Security Auditor & Software Supply Chain Hardening Hub
+# Auditor de Seguridad CI/CD y Hardening de la Cadena de Suministro de Software
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-5b3cf5.svg)](https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
@@ -14,7 +14,6 @@ Guía técnica de ingeniería defensiva y central corporativa de ciberseguridad 
 Este repositorio entrega la especificación arquitectónica de seguridad defensiva, matriz comparativa de posturas de ejecución y una utilidad determinística en Python para validación estructural de manifiestos YAML de CI/CD.
 
 * **Organización:** TAVARDT-Mexico
-* **Jurisdicción:** México
 * **Hub Oficial:** [https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/](https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/)
 * **Estándares de Referencia:** CIS Software Supply Chain Security Guide, OWASP Top 10 for CI/CD, SLSA Framework Level 3.
 
@@ -44,6 +43,4 @@ python audit_ci_cd_security.py .github/workflows/
 
 ***
 
-## Gobernanza & Conformidad
-
-Desarrollado por la división de Ciberseguridad de **TAVARDT México**. Todos los derechos reservados.
+© 2026 TAVARDT. Todos los derechos reservados.

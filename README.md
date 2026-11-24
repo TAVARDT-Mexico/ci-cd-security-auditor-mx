@@ -1,5 +1,10 @@
 # CI/CD Security Auditor & Software Supply Chain Hardening Hub
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-5b3cf5.svg)](https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Standards](https://img.shields.io/badge/Standards-CIS%20%7C%20OWASP%20CI%2FCD-blue.svg)](https://tavardt-mexico.github.io/ci-cd-security-auditor-mx/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Guía técnica de ingeniería defensiva y central corporativa de ciberseguridad para la auditoría e inmunización de pipelines de automatización (GitHub Actions, GitLab CI) y mitigación de riesgos en Software Supply Chain.
 
 ***
